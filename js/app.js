@@ -1,18 +1,16 @@
 let pantalla = "";
-let resultado = 0;
 let valor1 = 0;
 let valor2 = 0;
 let operacion = "";
 
-function ingresarValor(caracter){
-
+let ingresarValor = (caracter) =>{
     if(caracter!= "AC"){
         if(operacion == ""){
             if(caracter!="+" && caracter!="-" && caracter!="/" && caracter!="*"){
                 pantalla += caracter;
             }
             else if(caracter=="+" || caracter=="-" || caracter=="/" || caracter=="*"){
-                valor1 = parseInt(pantalla);
+                valor1 = parseFloat(pantalla);
                 pantalla = "";
                 operacion = caracter;
             }
@@ -23,19 +21,8 @@ function ingresarValor(caracter){
                 pantalla += caracter;
             }
             else if(caracter=="="){
-                valor2 = parseInt(pantalla);
-                if(operacion=="+"){
-                    pantalla = valor1+valor2;
-                }
-                else if(operacion=="-"){
-                    pantalla = valor1-valor2;
-                }
-                else if(operacion=="*"){
-                    pantalla = valor1*valor2;
-                }
-                else if(operacion=="/"){
-                    pantalla = valor1/valor2;
-                }   
+                valor2 = parseFloat(pantalla);
+                pantalla = "" + valor1 + operacion + valor2 + " = " + calcularResultado(valor1,valor2,operacion);
             }
             return display.innerHTML = pantalla;
         }
@@ -47,5 +34,22 @@ function ingresarValor(caracter){
         operacion="";
         return display.innerHTML = pantalla;
     }
+}
 
+let calcularResultado = (v1,v2,opc) =>{
+    let resultado=0;
+
+    if(opc=="+"){
+        resultado = v1+v2;
+    }
+    else if(opc=="-"){
+        resultado = v1-v2;
+    }
+    else if(opc=="*"){
+        resultado = v1*v2;
+    }
+    else if(opc=="/"){
+        resultado = v1/v2;
+    }   
+    return resultado.toLocaleString();;
 }
